@@ -1,3 +1,7 @@
+# Google API credentials
+credentials.json
+token.json
+
 __pycache__
 *.py[cod]
 *$py.class
