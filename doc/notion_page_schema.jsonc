@@ -1,0 +1,49 @@
+{
+    "object": "page",
+    "id": "191bf114-7fdd-4906-9fe2-d597ed2c7808",
+    "created_time": "2021-04-29T04: 43: 00.000Z",
+    "last_edited_time": "2021-08-19T17: 17: 00.000Z",
+    "cover": None,
+    "icon": None,
+    "parent": {
+        "type": "database_id",
+        "database_id": "56de8fb5-bae9-47b2-80bc-7c79db8b5cba"
+    },
+    "archived": False,
+    "properties": {
+        "Tags": {
+            "id": "B%5Eej",
+            "type": "multi_select",
+            "multi_select": []
+        },
+        "Date": {
+            "id": "YM%5DV",
+            "type": "date",
+            "date": None
+        },
+        "Name": {
+            "id": "title",
+            "type": "title",
+            "title": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "NY Trip",
+                        "link": None
+                    },
+                    "annotations": {
+                        "bold": False,
+                        "italic": False,
+                        "strikethrough": False,
+                        "underline": False,
+                        "code": False,
+                        "color": "default"
+                    },
+                    "plain_text": "NY Trip",
+                    "href": None
+                }
+            ]
+        }
+    },
+    "url": "https: //www.notion.so/NY-Trip-191bf1147fdd49069fe2d597ed2c7808"
+}
