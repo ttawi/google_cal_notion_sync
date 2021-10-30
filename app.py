@@ -1,5 +1,5 @@
 from __future__ import print_function
-import datetime
+from datetime import datetime, timedelta
 import logging
 import os.path
 from typing import Any, Optional
@@ -50,9 +50,6 @@ def __get_google_credential() -> Credentials:
 
 
 def __read_calendar(start_time: str, end_time: str) -> list[Event]:
-    """Shows basic usage of the Google Calendar API.
-    Prints the start and name of the next 10 events on the user's calendar.
-    """
     creds = __get_google_credential()
     service = build("calendar", "v3", credentials=creds)
 
@@ -71,7 +68,9 @@ def __read_calendar(start_time: str, end_time: str) -> list[Event]:
     )
     events = events_result.get("items", [])
 
-    return list(map(lambda _: Event(_), events))
+    # print(events)
+
+    return list(map(lambda _: Event.from_cal_event(_), events))
 
 
 def __read_notion(start_time: str, end_time: str) -> list[Event]:
@@ -90,6 +89,12 @@ def __read_notion(start_time: str, end_time: str) -> list[Event]:
     notion_events = notion.databases.query(
         NOTION_CALENDAR_DB_ID, filter=date_filter, sorts=date_sort
     )["results"]
+
+    # print properties
+    # print(notion_events)
+    # print content
+    # print(notion.blocks.children.list(notion_events[0]["id"]))
+
     return list(map(lambda _: Event.from_page_info(_), notion_events))
 
 
@@ -120,26 +125,28 @@ def __notion_set_date(start_cursor: Optional[str] = None):
 
 
 # Create a notion event based on google cal event
-def __notion_create_page(google_cal_event: Event) -> None:
+def __notion_create_page(event: Event) -> bool:
     credential = open(NOTION_INTEGRATION_CREDENTIAL_PATH, "r").readline()
     notion = Client(
         auth=credential,
     )
 
-    notion_page = Event.from_cal_event(google_cal_event)
-
     # Create a page first
     parent = {"database_id": NOTION_CALENDAR_DB_ID}
-    notion.pages.create(parent=parent, properties=notion_page.to_property())
-    id = "d90b8de8-7d9b-429a-bfd0-ecc3c5d3ed48"
-    page_content = notion.blocks.children.list(id)
-    print(page_content)
+    try:
+        notion.pages.create(
+            parent=parent, properties=event.to_property(), children=event.to_content()
+        )
+    except:
+        logging.exception("Failed to create page")
+        return False
+    return True
 
 
 def main() -> None:
-    now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+    now = datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
     two_yr_later = (
-        datetime.datetime.utcnow() + datetime.timedelta(days=365 * 2)
+        datetime.utcnow() + timedelta(days=90)
     ).isoformat() + "Z"  # 'Z' indicates UTC time
 
     print("Getting Google Calendar Events...")
@@ -155,11 +162,17 @@ def main() -> None:
         page.google_cal_id for page in notion_pages if page.google_cal_id
     ]
     unsynced_google_cal_events = [
-        event for event in google_cal_events if event.id not in synced_google_cal_ids
+        event
+        for event in google_cal_events
+        if event.google_cal_id not in synced_google_cal_ids
     ]
     print("Will sync " + str(len(unsynced_google_cal_events)) + " google cal events...")
+    created = 0
+    for event in unsynced_google_cal_events:
+        if __notion_create_page(event):
+            created += 1
+    print("Successfully created " + str(created) + " pages!")
 
 
 if __name__ == "__main__":
-    # __notion_create_event()
     main()

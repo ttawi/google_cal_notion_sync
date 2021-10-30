@@ -1,120 +1,16 @@
 [
     {
         "kind": "calendar#event",
-        "etag": ""3269777768652000"",
-        "id": "_6tlnaqrle5p6cpb4dhmj4phpehq30rb8d1nm2rhnd4p36t3ddgp7arblcdomce1m65jjgcbae4r62db5dkp68e9heoqm2or6csq3et386ssme",
+        "etag": ""3271153667754000"",
+        "id": "3v7f5ditg3df6ks6km0ek8sivg",
         "status": "confirmed",
-        "htmlLink": "https://www.google.com/calendar/event?eid=XzZ0bG5hcXJsZTVwNmNwYjRkaG1qNHBocGVocTMwcmI4ZDFubTJyaG5kNHAzNnQzZGRncDdhcmJsY2RvbWNlMW02NWpqZ2NiYWU0cjYyZGI1ZGtwNjhlOWhlb3FtMm9yNmNzcTNldDM4NnNzbWUgcWlhbi53aWxsLnlhbkBt",
-        "created": "2021-10-22T07:48:04.000Z",
-        "updated": "2021-10-22T07:48:04.326Z",
-        "summary": "Stay at 上海五角场凯悦酒店",
-        "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNcRbW0_hyaba_v8aZ0Te_VUPu1XsvofBA\n",
-        "location": "上海五角场凯悦酒店, Shanghai",
+        "htmlLink": "https://www.google.com/calendar/event?eid=M3Y3ZjVkaXRnM2RmNmtzNmttMGVrOHNpdmcgcWlhbi53aWxsLnlhbkBt",
+        "created": "2021-10-30T06:41:37.000Z",
+        "updated": "2021-10-30T06:53:53.877Z",
+        "summary": "all day",
+        "description": "TTTTT",
         "creator": {
             "email": "qian.will.yan@gmail.com",
-            "self": True
-        },
-        "organizer": {
-            "email": "unknownorganizer@calendar.google.com"
-        },
-        "start": {
-            "date": "2021-11-04"
-        },
-        "end": {
-            "date": "2021-11-12"
-        },
-        "transparency": "transparent",
-        "visibility": "private",
-        "iCalUID": "7kukuqrfedlm2f9tt0mhhoan7i23tml2umucqf861g81jq6a5em2d91v5acfg47th79g",
-        "sequence": 0,
-        "attendees": [
-            {
-                "email": "qian.will.yan@gmail.com",
-                "self": True,
-                "responseStatus": "accepted"
-            }
-        ],
-        "guestsCanInviteOthers": False,
-        "privateCopy": True,
-        "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {
-                    "method": "popup",
-                    "minutes": 30
-                }
-            ]
-        },
-        "source": {
-            "url": "https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNcRbW0_hyaba_v8aZ0Te_VUPu1XsvofBA",
-            "title": ""
-        },
-        "eventType": "default"
-    },
-    {
-        "kind": "calendar#event",
-        "etag": ""3270296234152000"",
-        "id": "_6tlnaqrle5p6cpb4dhmj4phpegp34dpj71r78d1gc9mmeqjge1qj0p3je5hmkcrkdhr38qpjd1lmgojbecqjeqj8d9gjior9e9h6kq32d1hme",
-        "status": "confirmed",
-        "htmlLink": "https://www.google.com/calendar/event?eid=XzZ0bG5hcXJsZTVwNmNwYjRkaG1qNHBocGVncDM0ZHBqNzFyNzhkMWdjOW1tZXFqZ2UxcWowcDNqZTVobWtjcmtkaHIzOHFwamQxbG1nb2piZWNxamVxajhkOWdqaW9yOWU5aDZrcTMyZDFobWUgcWlhbi53aWxsLnlhbkBt",
-        "created": "2021-10-25T07:48:37.000Z",
-        "updated": "2021-10-25T07:48:37.076Z",
-        "summary": "Stay at Hyatt Regency Kiev",
-        "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMGSP-sCOhhxdWqFW84yhw-aSN5gSO1wjw\n",
-        "location": "Hyatt Regency Kiev, Kyiv",
-        "creator": {
-            "email": "qian.will.yan@gmail.com",
-            "self": True
-        },
-        "organizer": {
-            "email": "unknownorganizer@calendar.google.com"
-        },
-        "start": {
-            "date": "2021-11-14"
-        },
-        "end": {
-            "date": "2021-11-16"
-        },
-        "transparency": "transparent",
-        "visibility": "private",
-        "iCalUID": "7kukuqrfedlm2f9t22738vt40bmgjppu0dsqcj3tlv4k3hkhbks57jhja9cirbjhbhcg",
-        "sequence": 0,
-        "attendees": [
-            {
-                "email": "qian.will.yan@gmail.com",
-                "self": True,
-                "responseStatus": "accepted"
-            }
-        ],
-        "guestsCanInviteOthers": False,
-        "privateCopy": True,
-        "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {
-                    "method": "popup",
-                    "minutes": 30
-                }
-            ]
-        },
-        "source": {
-            "url": "https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMGSP-sCOhhxdWqFW84yhw-aSN5gSO1wjw",
-            "title": ""
-        },
-        "eventType": "default"
-    },
-    {
-        "kind": "calendar#event",
-        "etag": ""3270958039336000"",
-        "id": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc_20220507",
-        "status": "confirmed",
-        "htmlLink": "https://www.google.com/calendar/event?eid=NzRyNjhvOWpjNG9tYWI5bTZkaDMyYjlrNmxqNjRiYjJjOHIzOGI5amNvcGoyY2huNmRpajRkaHBjY18yMDIyMDUwNyBxaWFuLndpbGwueWFuQG0",
-        "created": "2018-05-06T22:02:13.000Z",
-        "updated": "2021-10-29T03:43:40.057Z",
-        "summary": "妈生日",
-        "creator": {
-            "email": "qian.will.yan@gmail.com",
-            "displayName": "Qian Yan",
             "self": True
         },
         "organizer": {
@@ -122,18 +18,14 @@
             "self": True
         },
         "start": {
-            "date": "2022-05-07"
+            "date": "2021-11-01"
         },
         "end": {
-            "date": "2022-05-08"
-        },
-        "recurringEventId": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc",
-        "originalStartTime": {
-            "date": "2022-05-07"
+            "date": "2021-11-02"
         },
         "transparency": "transparent",
-        "iCalUID": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc@google.com",
-        "sequence": 0,
+        "iCalUID": "3v7f5ditg3df6ks6km0ek8sivg@google.com",
+        "sequence": 1,
         "reminders": {
             "useDefault": False,
             "overrides": [
@@ -147,55 +39,13 @@
     },
     {
         "kind": "calendar#event",
-        "etag": ""3270958026436000"",
-        "id": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8_20220621",
+        "etag": ""3271153678080000"",
+        "id": "7r82bl5olr0gjrd6i2jedr7e52",
         "status": "confirmed",
-        "htmlLink": "https://www.google.com/calendar/event?eid=NjFqM2VkMWdjNWhqZWJiMzZoaG00YjlrY2hnbWFiYjE3NWlqMmI5bDZrcjY0ZTlwNjhzM2djaG1jOF8yMDIyMDYyMSBxaWFuLndpbGwueWFuQG0",
-        "created": "2018-05-06T22:04:07.000Z",
-        "updated": "2021-10-29T03:43:33.574Z",
-        "summary": "爸生日",
-        "creator": {
-            "email": "qian.will.yan@gmail.com",
-            "displayName": "Qian Yan",
-            "self": True
-        },
-        "organizer": {
-            "email": "qian.will.yan@gmail.com",
-            "self": True
-        },
-        "start": {
-            "date": "2022-06-21"
-        },
-        "end": {
-            "date": "2022-06-22"
-        },
-        "recurringEventId": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8",
-        "originalStartTime": {
-            "date": "2022-06-21"
-        },
-        "transparency": "transparent",
-        "iCalUID": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8@google.com",
-        "sequence": 0,
-        "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {
-                    "method": "popup",
-                    "minutes": 30
-                }
-            ]
-        },
-        "eventType": "default"
-    },
-    {
-        "kind": "calendar#event",
-        "etag": ""3270958002319000"",
-        "id": "2oios4v8fp173kcfdttbor295f_20220828",
-        "status": "confirmed",
-        "htmlLink": "https://www.google.com/calendar/event?eid=Mm9pb3M0djhmcDE3M2tjZmR0dGJvcjI5NWZfMjAyMjA4MjggcWlhbi53aWxsLnlhbkBt",
-        "created": "2021-10-29T03:43:21.000Z",
-        "updated": "2021-10-29T03:43:21.273Z",
-        "summary": "宜宝生日",
+        "htmlLink": "https://www.google.com/calendar/event?eid=N3I4MmJsNW9scjBnanJkNmkyamVkcjdlNTIgcWlhbi53aWxsLnlhbkBt",
+        "created": "2021-10-30T06:53:47.000Z",
+        "updated": "2021-10-30T06:53:59.040Z",
+        "summary": "specific",
         "creator": {
             "email": "qian.will.yan@gmail.com",
             "self": True
@@ -205,151 +55,17 @@
             "self": True
         },
         "start": {
-            "date": "2022-08-28"
+            "dateTime": "2021-11-01T10:00:00+08:00",
+            "timeZone": "Asia/Shanghai"
         },
         "end": {
-            "date": "2022-08-29"
+            "dateTime": "2021-11-01T10:30:00+08:00",
+            "timeZone": "Asia/Shanghai"
         },
-        "recurringEventId": "2oios4v8fp173kcfdttbor295f",
-        "originalStartTime": {
-            "date": "2022-08-28"
-        },
-        "transparency": "transparent",
-        "iCalUID": "2oios4v8fp173kcfdttbor295f@google.com",
-        "sequence": 0,
+        "iCalUID": "7r82bl5olr0gjrd6i2jedr7e52@google.com",
+        "sequence": 1,
         "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {
-                    "method": "popup",
-                    "minutes": 18750
-                }
-            ]
-        },
-        "eventType": "default"
-    },
-    {
-        "kind": "calendar#event",
-        "etag": ""3270958039336000"",
-        "id": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc_20230507",
-        "status": "confirmed",
-        "htmlLink": "https://www.google.com/calendar/event?eid=NzRyNjhvOWpjNG9tYWI5bTZkaDMyYjlrNmxqNjRiYjJjOHIzOGI5amNvcGoyY2huNmRpajRkaHBjY18yMDIzMDUwNyBxaWFuLndpbGwueWFuQG0",
-        "created": "2018-05-06T22:02:13.000Z",
-        "updated": "2021-10-29T03:43:40.057Z",
-        "summary": "妈生日",
-        "creator": {
-            "email": "qian.will.yan@gmail.com",
-            "displayName": "Qian Yan",
-            "self": True
-        },
-        "organizer": {
-            "email": "qian.will.yan@gmail.com",
-            "self": True
-        },
-        "start": {
-            "date": "2023-05-07"
-        },
-        "end": {
-            "date": "2023-05-08"
-        },
-        "recurringEventId": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc",
-        "originalStartTime": {
-            "date": "2023-05-07"
-        },
-        "transparency": "transparent",
-        "iCalUID": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc@google.com",
-        "sequence": 0,
-        "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {
-                    "method": "popup",
-                    "minutes": 30
-                }
-            ]
-        },
-        "eventType": "default"
-    },
-    {
-        "kind": "calendar#event",
-        "etag": ""3270958026436000"",
-        "id": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8_20230621",
-        "status": "confirmed",
-        "htmlLink": "https://www.google.com/calendar/event?eid=NjFqM2VkMWdjNWhqZWJiMzZoaG00YjlrY2hnbWFiYjE3NWlqMmI5bDZrcjY0ZTlwNjhzM2djaG1jOF8yMDIzMDYyMSBxaWFuLndpbGwueWFuQG0",
-        "created": "2018-05-06T22:04:07.000Z",
-        "updated": "2021-10-29T03:43:33.574Z",
-        "summary": "爸生日",
-        "creator": {
-            "email": "qian.will.yan@gmail.com",
-            "displayName": "Qian Yan",
-            "self": True
-        },
-        "organizer": {
-            "email": "qian.will.yan@gmail.com",
-            "self": True
-        },
-        "start": {
-            "date": "2023-06-21"
-        },
-        "end": {
-            "date": "2023-06-22"
-        },
-        "recurringEventId": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8",
-        "originalStartTime": {
-            "date": "2023-06-21"
-        },
-        "transparency": "transparent",
-        "iCalUID": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8@google.com",
-        "sequence": 0,
-        "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {
-                    "method": "popup",
-                    "minutes": 30
-                }
-            ]
-        },
-        "eventType": "default"
-    },
-    {
-        "kind": "calendar#event",
-        "etag": ""3270958002319000"",
-        "id": "2oios4v8fp173kcfdttbor295f_20230828",
-        "status": "confirmed",
-        "htmlLink": "https://www.google.com/calendar/event?eid=Mm9pb3M0djhmcDE3M2tjZmR0dGJvcjI5NWZfMjAyMzA4MjggcWlhbi53aWxsLnlhbkBt",
-        "created": "2021-10-29T03:43:21.000Z",
-        "updated": "2021-10-29T03:43:21.273Z",
-        "summary": "宜宝生日",
-        "creator": {
-            "email": "qian.will.yan@gmail.com",
-            "self": True
-        },
-        "organizer": {
-            "email": "qian.will.yan@gmail.com",
-            "self": True
-        },
-        "start": {
-            "date": "2023-08-28"
-        },
-        "end": {
-            "date": "2023-08-29"
-        },
-        "recurringEventId": "2oios4v8fp173kcfdttbor295f",
-        "originalStartTime": {
-            "date": "2023-08-28"
-        },
-        "transparency": "transparent",
-        "iCalUID": "2oios4v8fp173kcfdttbor295f@google.com",
-        "sequence": 0,
-        "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {
-                    "method": "popup",
-                    "minutes": 18750
-                }
-            ]
+            "useDefault": True
         },
         "eventType": "default"
     }
