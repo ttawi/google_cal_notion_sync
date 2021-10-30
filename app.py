@@ -10,7 +10,8 @@ from google.oauth2.credentials import Credentials
 import httpx
 from notion_client import Client
 
-from event_types import CalEvent, NotionPage
+from event import Event
+
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
@@ -48,7 +49,7 @@ def __get_google_credential() -> Credentials:
     return creds
 
 
-def __read_calendar(start_time: str, end_time: str) -> list[CalEvent]:
+def __read_calendar(start_time: str, end_time: str) -> list[Event]:
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
     """
@@ -70,10 +71,10 @@ def __read_calendar(start_time: str, end_time: str) -> list[CalEvent]:
     )
     events = events_result.get("items", [])
 
-    return list(map(lambda _: CalEvent(_), events))
+    return list(map(lambda _: Event(_), events))
 
 
-def __read_notion(start_time: str, end_time: str) -> list[NotionPage]:
+def __read_notion(start_time: str, end_time: str) -> list[Event]:
     credential = open(NOTION_INTEGRATION_CREDENTIAL_PATH, "r").readline()
     notion = Client(
         auth=credential,
@@ -89,7 +90,7 @@ def __read_notion(start_time: str, end_time: str) -> list[NotionPage]:
     notion_events = notion.databases.query(
         NOTION_CALENDAR_DB_ID, filter=date_filter, sorts=date_sort
     )["results"]
-    return list(map(lambda _: NotionPage(_), notion_events))
+    return list(map(lambda _: Event.from_page_info(_), notion_events))
 
 
 # An util function to give each page a default date equals to creation date if they do not have one
@@ -117,6 +118,24 @@ def __notion_set_date(start_cursor: Optional[str] = None):
     if response["has_more"]:
         __notion_set_date(response["next_cursor"])
 
+
+# Create a notion event based on google cal event
+def __notion_create_page(google_cal_event: Event) -> None:
+    credential = open(NOTION_INTEGRATION_CREDENTIAL_PATH, "r").readline()
+    notion = Client(
+        auth=credential,
+    )
+
+    notion_page = Event.from_cal_event(google_cal_event)
+
+    # Create a page first
+    parent = {"database_id": NOTION_CALENDAR_DB_ID}
+    notion.pages.create(parent=parent, properties=notion_page.to_property())
+    id = "d90b8de8-7d9b-429a-bfd0-ecc3c5d3ed48"
+    page_content = notion.blocks.children.list(id)
+    print(page_content)
+
+
 def main() -> None:
     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
     two_yr_later = (
@@ -140,5 +159,7 @@ def main() -> None:
     ]
     print("Will sync " + str(len(unsynced_google_cal_events)) + " google cal events...")
 
+
 if __name__ == "__main__":
+    # __notion_create_event()
     main()
