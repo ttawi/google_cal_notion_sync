@@ -1,266 +1,356 @@
-{
-    "anyoneCanAddSelf": false, # Whether anyone can invite themselves to the event (deprecated). Optional. The default is False.
-    "attachments": [ # File attachments for the event. Currently only Google Drive attachments are supported.
-        # In order to modify attachments the supportsAttachments request parameter should be set to true.
-        # There can be at most 25 attachments per event,
-        {
-            "fileId": "A String", # ID of the attached file. Read-only.
-            # For Google Drive files, this is the ID of the corresponding Files resource entry in the Drive API.
-        "fileUrl": "A String", # URL link to the attachment.
-            # For adding Google Drive file attachments use the same format as in alternateLink property of the Files resource in the Drive API.
-            # Required when adding an attachment.
-        "iconLink": "A String", # URL link to the attachment's icon. Read-only.
-        "mimeType": "A String", # Internet media type (MIME type) of the attachment.
-        "title": "A String", # Attachment title.
+[
+    {
+        "kind": "calendar#event",
+        "etag": ""3269777768652000"",
+        "id": "_6tlnaqrle5p6cpb4dhmj4phpehq30rb8d1nm2rhnd4p36t3ddgp7arblcdomce1m65jjgcbae4r62db5dkp68e9heoqm2or6csq3et386ssme",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=XzZ0bG5hcXJsZTVwNmNwYjRkaG1qNHBocGVocTMwcmI4ZDFubTJyaG5kNHAzNnQzZGRncDdhcmJsY2RvbWNlMW02NWpqZ2NiYWU0cjYyZGI1ZGtwNjhlOWhlb3FtMm9yNmNzcTNldDM4NnNzbWUgcWlhbi53aWxsLnlhbkBt",
+        "created": "2021-10-22T07:48:04.000Z",
+        "updated": "2021-10-22T07:48:04.326Z",
+        "summary": "Stay at 上海五角场凯悦酒店",
+        "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNcRbW0_hyaba_v8aZ0Te_VUPu1XsvofBA\n",
+        "location": "上海五角场凯悦酒店, Shanghai",
+        "creator": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
         },
-    ],
-    "attendees": [ # The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.
-      {
-            "additionalGuests": 0, # Number of additional guests. Optional. The default is 0.
-        "comment": "A String", # The attendee's response comment. Optional.
-        "displayName": "A String", # The attendee's name, if available. Optional.
-        "email": "A String", # The attendee's email address, if available. This field must be present when adding an attendee. It must be a valid email address as per RFC5322.
-            # Required when adding an attendee.
-        "id": "A String", # The attendee's Profile ID, if available.
-        "optional": false, # Whether this is an optional attendee. Optional. The default is False.
-        "organizer": True or False, # Whether the attendee is the organizer of the event. Read-only. The default is False.
-        "resource": false, # Whether the attendee is a resource. Can only be set when the attendee is added to the event for the first time. Subsequent modifications are ignored. Optional. The default is False.
-        "responseStatus": "A String", # The attendee's response status. Possible values are:
-            # - "needsAction" - The attendee has not responded to the invitation.
-            # - "declined" - The attendee has declined the invitation.
-            # - "tentative" - The attendee has tentatively accepted the invitation.
-            # - "accepted" - The attendee has accepted the invitation.
-        "self": false, # Whether this entry represents the calendar on which this copy of the event appears. Read-only. The default is False.
+        "organizer": {
+            "email": "unknownorganizer@calendar.google.com"
         },
-    ],
-    "attendeesOmitted": false, # Whether attendees may have been omitted from the event's representation. When retrieving an event, this may be due to a restriction specified by the maxAttendee query parameter. When updating an event, this can be used to only update the participant's response. Optional. The default is False.
-    "colorId": "A String", # The color of the event. This is an ID referring to an entry in the event section of the colors definition (see the  colors endpoint). Optional.
-    "conferenceData": { # The conference-related information, such as details of a Google Meet conference. To create new conference details use the createRequest field. To persist your changes, remember to set the conferenceDataVersion request parameter to 1 for all event modification requests.
-      "conferenceId": "A String", # The ID of the conference.
-          # Can be used by developers to keep track of conferences, should not be displayed to users.
-          # The ID value is formed differently for each conference solution type:
-          # - eventHangout: ID is not set. (This conference type is deprecated.)
-          # - eventNamedHangout: ID is the name of the Hangout. (This conference type is deprecated.)
-          # - hangoutsMeet: ID is the 10-letter meeting code, for example aaa-bbbb-ccc.
-          # - addOn: ID is defined by the third-party provider.  Optional.
-      "conferenceSolution": { # The conference solution, such as Google Meet.
-          # Unset for a conference with a failed create request.
-          # Either conferenceSolution and at least one entryPoint, or createRequest is required.
-        "iconUri": "A String", # The user-visible icon for this solution.
-        "key": { # The key which can uniquely identify the conference solution for this event.
-          "type": "A String", # The conference solution type.
-              # If a client encounters an unfamiliar or empty type, it should still be able to display the entry points. However, it should disallow modifications.
-              # The possible values are:
-              # - "eventHangout" for Hangouts for consumers (deprecated; existing events may show this conference solution type but new conferences cannot be created)
-              # - "eventNamedHangout" for classic Hangouts for Google Workspace users (deprecated; existing events may show this conference solution type but new conferences cannot be created)
-              # - "hangoutsMeet" for Google Meet (http: //meet.google.com)
-              # - "addOn" for 3P conference providers
-            },
-            "name": "A String", # The user-visible name of this solution. Not localized.
+        "start": {
+            "date": "2021-11-04"
         },
-        "createRequest": { # A request to generate a new conference and attach it to the event. The data is generated asynchronously. To see whether the data is present check the status field.
-          # Either conferenceSolution and at least one entryPoint, or createRequest is required.
-        "conferenceSolutionKey": { # The conference solution, such as Hangouts or Google Meet.
-          "type": "A String", # The conference solution type.
-              # If a client encounters an unfamiliar or empty type, it should still be able to display the entry points. However, it should disallow modifications.
-              # The possible values are:
-              # - "eventHangout" for Hangouts for consumers (deprecated; existing events may show this conference solution type but new conferences cannot be created)
-              # - "eventNamedHangout" for classic Hangouts for Google Workspace users (deprecated; existing events may show this conference solution type but new conferences cannot be created)
-              # - "hangoutsMeet" for Google Meet (http: //meet.google.com)
-              # - "addOn" for 3P conference providers
-            },
-            "requestId": "A String", # The client-generated unique ID for this request.
-            # Clients should regenerate this ID for every new request. If an ID provided is the same as for the previous request, the request is ignored.
-        "status": { # The status of the conference create request.
-          "statusCode": "A String", # The current status of the conference create request. Read-only.
-              # The possible values are:
-              # - "pending": the conference create request is still being processed.
-              # - "success": the conference create request succeeded, the entry points are populated.
-              # - "failure": the conference create request failed, there are no entry points.
-            },
+        "end": {
+            "date": "2021-11-12"
         },
-        "entryPoints": [ # Information about individual conference entry points, such as URLs or phone numbers.
-          # All of them must belong to the same conference.
-          # Either conferenceSolution and at least one entryPoint, or createRequest is required.
-        {
-                "accessCode": "A String", # The access code to access the conference. The maximum length is 128 characters.
-              # When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin
-                } fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
-              # Optional.
-          "entryPointFeatures": [ # Features of the entry point, such as being toll or toll-free. One entry point can have multiple features. However, toll and toll-free cannot be both set on the same entry point.
-            "A String",
-                ],
-                "entryPointType": "A String", # The type of the conference entry point.
-              # Possible values are:
-              # - "video" - joining a conference over HTTP. A conference can have zero or one video entry point.
-              # - "phone" - joining a conference by dialing a phone number. A conference can have zero or more phone entry points.
-              # - "sip" - joining a conference over SIP. A conference can have zero or one sip entry point.
-              # - "more" - further conference joining instructions, for example additional phone numbers. A conference can have zero or one more entry point. A conference with only a more entry point is not a valid conference.
-          "label": "A String", # The label for the URI. Visible to end users. Not localized. The maximum length is 512 characters.
-              # Examples:
-              # - for video: meet.google.com/aaa-bbbb-ccc
-              # - for phone: +1 123 268 2601
-              # - for sip: 12345678@altostrat.com
-              # - for more: should not be filled
-              # Optional.
-          "meetingCode": "A String", # The meeting code to access the conference. The maximum length is 128 characters.
-              # When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin
-                } fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
-              # Optional.
-          "passcode": "A String", # The passcode to access the conference. The maximum length is 128 characters.
-              # When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin
-                } fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
-          "password": "A String", # The password to access the conference. The maximum length is 128 characters.
-              # When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin
-                } fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
-              # Optional.
-          "pin": "A String", # The PIN to access the conference. The maximum length is 128 characters.
-              # When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin
-                } fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
-              # Optional.
-          "regionCode": "A String", # The CLDR/ISO 3166 region code for the country associated with this phone access. Example: "SE" for Sweden.
-              # Calendar backend will populate this field only for EntryPointType.PHONE.
-          "uri": "A String", # The URI of the entry point. The maximum length is 1300 characters.
-              # Format:
-              # - for video, http: or https: schema is required.
-              # - for phone, tel: schema is required. The URI should include the entire dial sequence (e.g., tel:+12345678900,
-                ,
-                ,
-                123456789;1234).
-              # - for sip, sip: schema is required, e.g., sip: 12345678@myprovider.com.
-              # - for more, http: or https: schema is required.
-            },
+        "transparency": "transparent",
+        "visibility": "private",
+        "iCalUID": "7kukuqrfedlm2f9tt0mhhoan7i23tml2umucqf861g81jq6a5em2d91v5acfg47th79g",
+        "sequence": 0,
+        "attendees": [
+            {
+                "email": "qian.will.yan@gmail.com",
+                "self": True,
+                "responseStatus": "accepted"
+            }
         ],
-        "notes": "A String", # Additional notes (such as instructions from the domain administrator, legal notices) to display to the user. Can contain HTML. The maximum length is 2048 characters. Optional.
-      "parameters": { # Additional properties related to a conference. An example would be a solution-specific setting for enabling video streaming.
-        "addOnParameters": { # Additional add-on specific data.
-          "parameters": {
-                    "a_key": "A String",
-                },
-            },
+        "guestsCanInviteOthers": False,
+        "privateCopy": True,
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": 30
+                }
+            ]
         },
-        "signature": "A String", # The signature of the conference data.
-          # Generated on server side. Must be preserved while copying the conference data between events, otherwise the conference data will not be copied.
-          # Unset for a conference with a failed create request.
-          # Optional for a conference with a pending create request.
-    },
-    "created": "A String", # Creation time of the event (as a RFC3339 timestamp). Read-only.
-    "creator": { # The creator of the event. Read-only.
-      "displayName": "A String", # The creator's name, if available.
-      "email": "A String", # The creator's email address, if available.
-      "id": "A String", # The creator's Profile ID, if available.
-      "self": false, # Whether the creator corresponds to the calendar on which this copy of the event appears. Read-only. The default is False.
-    },
-    "description": "A String", # Description of the event. Can contain HTML. Optional.
-    "end": { # The (exclusive) end time of the event. For a recurring event, this is the end time of the first instance.
-      "date": "A String", # The date, in the format "yyyy-mm-dd", if this is an all-day event.
-      "dateTime": "A String", # The time, as a combined date-time value (formatted according to RFC3339). A time zone offset is required unless a time zone is explicitly specified in timeZone.
-      "timeZone": "A String", # The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start/end.
-    },
-    "endTimeUnspecified": false, # Whether the end time is actually unspecified. An end time is still provided for compatibility reasons, even if this attribute is set to True. The default is False.
-    "etag": "A String", # ETag of the resource.
-    "eventType": "default", # Specific type of the event. Read-only. Possible values are:
-        # - "default" - A regular event or not further specified.
-        # - "outOfOffice" - An out-of-office event.
-    "extendedProperties": { # Extended properties of the event.
-      "private": { # Properties that are private to the copy of the event that appears on this calendar.
-        "a_key": "A String", # The name of the private property and the corresponding value.
+        "source": {
+            "url": "https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNcRbW0_hyaba_v8aZ0Te_VUPu1XsvofBA",
+            "title": ""
         },
-        "shared": { # Properties that are shared between copies of the event on other attendees' calendars.
-        "a_key": "A String", # The name of the shared property and the corresponding value.
+        "eventType": "default"
+    },
+    {
+        "kind": "calendar#event",
+        "etag": ""3270296234152000"",
+        "id": "_6tlnaqrle5p6cpb4dhmj4phpegp34dpj71r78d1gc9mmeqjge1qj0p3je5hmkcrkdhr38qpjd1lmgojbecqjeqj8d9gjior9e9h6kq32d1hme",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=XzZ0bG5hcXJsZTVwNmNwYjRkaG1qNHBocGVncDM0ZHBqNzFyNzhkMWdjOW1tZXFqZ2UxcWowcDNqZTVobWtjcmtkaHIzOHFwamQxbG1nb2piZWNxamVxajhkOWdqaW9yOWU5aDZrcTMyZDFobWUgcWlhbi53aWxsLnlhbkBt",
+        "created": "2021-10-25T07:48:37.000Z",
+        "updated": "2021-10-25T07:48:37.076Z",
+        "summary": "Stay at Hyatt Regency Kiev",
+        "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMGSP-sCOhhxdWqFW84yhw-aSN5gSO1wjw\n",
+        "location": "Hyatt Regency Kiev, Kyiv",
+        "creator": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
         },
-    },
-    "gadget": { # A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-      "display": "A String", # The gadget's display mode. Deprecated. Possible values are:
-          # - "icon" - The gadget displays next to the event's title in the calendar view.
-          # - "chip" - The gadget displays when the event is clicked.
-      "height": 42, # The gadget's height in pixels. The height must be an integer greater than 0. Optional. Deprecated.
-      "iconLink": "A String", # The gadget's icon URL. The URL scheme must be HTTPS. Deprecated.
-      "link": "A String", # The gadget's URL. The URL scheme must be HTTPS. Deprecated.
-      "preferences": { # Preferences.
-        "a_key": "A String", # The preference name and corresponding value.
+        "organizer": {
+            "email": "unknownorganizer@calendar.google.com"
         },
-        "title": "A String", # The gadget's title. Deprecated.
-      "type": "A String", # The gadget's type. Deprecated.
-      "width": 42, # The gadget's width in pixels. The width must be an integer greater than 0. Optional. Deprecated.
-    },
-    "guestsCanInviteOthers": true, # Whether attendees other than the organizer can invite others to the event. Optional. The default is True.
-    "guestsCanModify": false, # Whether attendees other than the organizer can modify the event. Optional. The default is False.
-    "guestsCanSeeOtherGuests": true, # Whether attendees other than the organizer can see who the event's attendees are. Optional. The default is True.
-    "hangoutLink": "A String", # An absolute link to the Google Hangout associated with this event. Read-only.
-    "htmlLink": "A String", # An absolute link to this event in the Google Calendar Web UI. Read-only.
-    "iCalUID": "A String", # Event unique identifier as defined in RFC5545. It is used to uniquely identify events accross calendaring systems and must be supplied when importing events via the import method.
-        # Note that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs.
-    "id": "A String", # Opaque identifier of the event. When creating new single or recurring events, you can specify their IDs. Provided IDs must follow these rules:
-        # - characters allowed in the ID are those used in base32hex encoding, i.e. lowercase letters a-v and digits 0-9, see section 3.1.2 in RFC2938
-        # - the length of the ID must be between 5 and 1024 characters
-        # - the ID must be unique per calendar  Due to the globally distributed nature of the system, we cannot guarantee that ID collisions will be detected at event creation time. To minimize the risk of collisions we recommend using an established UUID algorithm such as one described in RFC4122.
-        # If you do not specify an ID, it will be automatically generated by the server.
-        # Note that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs.
-    "kind": "calendar#event", # Type of the resource ("calendar#event").
-    "location": "A String", # Geographic location of the event as free-form text. Optional.
-    "locked": false, # Whether this is a locked event copy where no changes can be made to the main event fields "summary",
-    "description",
-    "location",
-    "start",
-    "end" or "recurrence". The default is False. Read-Only.
-    "organizer": { # The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
-      "displayName": "A String", # The organizer's name, if available.
-      "email": "A String", # The organizer's email address, if available. It must be a valid email address as per RFC5322.
-      "id": "A String", # The organizer's Profile ID, if available.
-      "self": false, # Whether the organizer corresponds to the calendar on which this copy of the event appears. Read-only. The default is False.
-    },
-    "originalStartTime": { # For an instance of a recurring event, this is the time at which this event would start according to the recurrence data in the recurring event identified by recurringEventId. It uniquely identifies the instance within the recurring event series even if the instance was moved to a different time. Immutable.
-      "date": "A String", # The date, in the format "yyyy-mm-dd", if this is an all-day event.
-      "dateTime": "A String", # The time, as a combined date-time value (formatted according to RFC3339). A time zone offset is required unless a time zone is explicitly specified in timeZone.
-      "timeZone": "A String", # The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start/end.
-    },
-    "privateCopy": false, # If set to True, Event propagation is disabled. Note that it is not the same thing as Private event properties. Optional. Immutable. The default is False.
-    "recurrence": [ # List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND lines are not allowed in this field; event start and end times are specified in the start and end fields. This field is omitted for single events or instances of recurring events.
-      "A String",
-    ],
-    "recurringEventId": "A String", # For an instance of a recurring event, this is the id of the recurring event to which this instance belongs. Immutable.
-    "reminders": { # Information about the event's reminders for the authenticated user.
-      "overrides": [ # If the event doesn't use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event. The maximum number of override reminders is 5.
-        {
-                "method": "A String", # The method used by this reminder. Possible values are:
-              # - "email" - Reminders are sent via email.
-              # - "popup" - Reminders are sent via a UI popup.
-              # Required when adding a reminder.
-          "minutes": 42, # Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes).
-              # Required when adding a reminder.
-            },
+        "start": {
+            "date": "2021-11-14"
+        },
+        "end": {
+            "date": "2021-11-16"
+        },
+        "transparency": "transparent",
+        "visibility": "private",
+        "iCalUID": "7kukuqrfedlm2f9t22738vt40bmgjppu0dsqcj3tlv4k3hkhbks57jhja9cirbjhbhcg",
+        "sequence": 0,
+        "attendees": [
+            {
+                "email": "qian.will.yan@gmail.com",
+                "self": True,
+                "responseStatus": "accepted"
+            }
         ],
-        "useDefault": True or False, # Whether the default reminders of the calendar apply to the event.
+        "guestsCanInviteOthers": False,
+        "privateCopy": True,
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": 30
+                }
+            ]
+        },
+        "source": {
+            "url": "https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMGSP-sCOhhxdWqFW84yhw-aSN5gSO1wjw",
+            "title": ""
+        },
+        "eventType": "default"
     },
-    "sequence": 42, # Sequence number as per iCalendar.
-    "source": { # Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
-      "title": "A String", # Title of the source; for example a title of a web page or an email subject.
-      "url": "A String", # URL of the source pointing to a resource. The URL scheme must be HTTP or HTTPS.
+    {
+        "kind": "calendar#event",
+        "etag": ""3270958039336000"",
+        "id": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc_20220507",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=NzRyNjhvOWpjNG9tYWI5bTZkaDMyYjlrNmxqNjRiYjJjOHIzOGI5amNvcGoyY2huNmRpajRkaHBjY18yMDIyMDUwNyBxaWFuLndpbGwueWFuQG0",
+        "created": "2018-05-06T22:02:13.000Z",
+        "updated": "2021-10-29T03:43:40.057Z",
+        "summary": "妈生日",
+        "creator": {
+            "email": "qian.will.yan@gmail.com",
+            "displayName": "Qian Yan",
+            "self": True
+        },
+        "organizer": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
+        },
+        "start": {
+            "date": "2022-05-07"
+        },
+        "end": {
+            "date": "2022-05-08"
+        },
+        "recurringEventId": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc",
+        "originalStartTime": {
+            "date": "2022-05-07"
+        },
+        "transparency": "transparent",
+        "iCalUID": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": 30
+                }
+            ]
+        },
+        "eventType": "default"
     },
-    "start": { # The (inclusive) start time of the event. For a recurring event, this is the start time of the first instance.
-      "date": "A String", # The date, in the format "yyyy-mm-dd", if this is an all-day event.
-      "dateTime": "A String", # The time, as a combined date-time value (formatted according to RFC3339). A time zone offset is required unless a time zone is explicitly specified in timeZone.
-      "timeZone": "A String", # The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start/end.
+    {
+        "kind": "calendar#event",
+        "etag": ""3270958026436000"",
+        "id": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8_20220621",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=NjFqM2VkMWdjNWhqZWJiMzZoaG00YjlrY2hnbWFiYjE3NWlqMmI5bDZrcjY0ZTlwNjhzM2djaG1jOF8yMDIyMDYyMSBxaWFuLndpbGwueWFuQG0",
+        "created": "2018-05-06T22:04:07.000Z",
+        "updated": "2021-10-29T03:43:33.574Z",
+        "summary": "爸生日",
+        "creator": {
+            "email": "qian.will.yan@gmail.com",
+            "displayName": "Qian Yan",
+            "self": True
+        },
+        "organizer": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
+        },
+        "start": {
+            "date": "2022-06-21"
+        },
+        "end": {
+            "date": "2022-06-22"
+        },
+        "recurringEventId": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8",
+        "originalStartTime": {
+            "date": "2022-06-21"
+        },
+        "transparency": "transparent",
+        "iCalUID": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": 30
+                }
+            ]
+        },
+        "eventType": "default"
     },
-    "status": "A String", # Status of the event. Optional. Possible values are:
-        # - "confirmed" - The event is confirmed. This is the default status.
-        # - "tentative" - The event is tentatively confirmed.
-        # - "cancelled" - The event is cancelled (deleted). The list method returns cancelled events only on incremental sync (when syncToken or updatedMin are specified) or if the showDeleted flag is set to true. The get method always returns them.
-        # A cancelled status represents two different states depending on the event type:
-        # - Cancelled exceptions of an uncancelled recurring event indicate that this instance should no longer be presented to the user. Clients should store these events for the lifetime of the parent recurring event.
-        # Cancelled exceptions are only guaranteed to have values for the id, recurringEventId and originalStartTime fields populated. The other fields might be empty.
-        # - All other cancelled events represent deleted events. Clients should remove their locally synced copies. Such cancelled events will eventually disappear, so do not rely on them being available indefinitely.
-        # Deleted events are only guaranteed to have the id field populated.   On the organizer's calendar, cancelled events continue to expose event details (summary, location, etc.) so that they can be restored (undeleted). Similarly, the events to which the user was invited and that they manually removed continue to provide details. However, incremental sync requests with showDeleted set to false will not return these details.
-        # If an event changes its organizer (for example via the move operation) and the original organizer is not on the attendee list, it will leave behind a cancelled event where only the id field is guaranteed to be populated.
-    "summary": "A String", # Title of the event.
-    "transparency": "opaque", # Whether the event blocks time on the calendar. Optional. Possible values are:
-        # - "opaque" - Default value. The event does block time on the calendar. This is equivalent to setting Show me as to Busy in the Calendar UI.
-        # - "transparent" - The event does not block time on the calendar. This is equivalent to setting Show me as to Available in the Calendar UI.
-    "updated": "A String", # Last modification time of the event (as a RFC3339 timestamp). Read-only.
-    "visibility": "default", # Visibility of the event. Optional. Possible values are:
-        # - "default" - Uses the default visibility for events on the calendar. This is the default value.
-        # - "public" - The event is public and event details are visible to all readers of the calendar.
-        # - "private" - The event is private and only event attendees may view event details.
-        # - "confidential" - The event is private. This value is provided for compatibility reasons.
-},
+    {
+        "kind": "calendar#event",
+        "etag": ""3270958002319000"",
+        "id": "2oios4v8fp173kcfdttbor295f_20220828",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=Mm9pb3M0djhmcDE3M2tjZmR0dGJvcjI5NWZfMjAyMjA4MjggcWlhbi53aWxsLnlhbkBt",
+        "created": "2021-10-29T03:43:21.000Z",
+        "updated": "2021-10-29T03:43:21.273Z",
+        "summary": "宜宝生日",
+        "creator": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
+        },
+        "organizer": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
+        },
+        "start": {
+            "date": "2022-08-28"
+        },
+        "end": {
+            "date": "2022-08-29"
+        },
+        "recurringEventId": "2oios4v8fp173kcfdttbor295f",
+        "originalStartTime": {
+            "date": "2022-08-28"
+        },
+        "transparency": "transparent",
+        "iCalUID": "2oios4v8fp173kcfdttbor295f@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": 18750
+                }
+            ]
+        },
+        "eventType": "default"
+    },
+    {
+        "kind": "calendar#event",
+        "etag": ""3270958039336000"",
+        "id": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc_20230507",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=NzRyNjhvOWpjNG9tYWI5bTZkaDMyYjlrNmxqNjRiYjJjOHIzOGI5amNvcGoyY2huNmRpajRkaHBjY18yMDIzMDUwNyBxaWFuLndpbGwueWFuQG0",
+        "created": "2018-05-06T22:02:13.000Z",
+        "updated": "2021-10-29T03:43:40.057Z",
+        "summary": "妈生日",
+        "creator": {
+            "email": "qian.will.yan@gmail.com",
+            "displayName": "Qian Yan",
+            "self": True
+        },
+        "organizer": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
+        },
+        "start": {
+            "date": "2023-05-07"
+        },
+        "end": {
+            "date": "2023-05-08"
+        },
+        "recurringEventId": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc",
+        "originalStartTime": {
+            "date": "2023-05-07"
+        },
+        "transparency": "transparent",
+        "iCalUID": "74r68o9jc4omab9m6dh32b9k6lj64bb2c8r38b9jcopj2chn6dij4dhpcc@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": 30
+                }
+            ]
+        },
+        "eventType": "default"
+    },
+    {
+        "kind": "calendar#event",
+        "etag": ""3270958026436000"",
+        "id": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8_20230621",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=NjFqM2VkMWdjNWhqZWJiMzZoaG00YjlrY2hnbWFiYjE3NWlqMmI5bDZrcjY0ZTlwNjhzM2djaG1jOF8yMDIzMDYyMSBxaWFuLndpbGwueWFuQG0",
+        "created": "2018-05-06T22:04:07.000Z",
+        "updated": "2021-10-29T03:43:33.574Z",
+        "summary": "爸生日",
+        "creator": {
+            "email": "qian.will.yan@gmail.com",
+            "displayName": "Qian Yan",
+            "self": True
+        },
+        "organizer": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
+        },
+        "start": {
+            "date": "2023-06-21"
+        },
+        "end": {
+            "date": "2023-06-22"
+        },
+        "recurringEventId": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8",
+        "originalStartTime": {
+            "date": "2023-06-21"
+        },
+        "transparency": "transparent",
+        "iCalUID": "61j3ed1gc5hjebb36hhm4b9kchgmabb175ij2b9l6kr64e9p68s3gchmc8@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": 30
+                }
+            ]
+        },
+        "eventType": "default"
+    },
+    {
+        "kind": "calendar#event",
+        "etag": ""3270958002319000"",
+        "id": "2oios4v8fp173kcfdttbor295f_20230828",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=Mm9pb3M0djhmcDE3M2tjZmR0dGJvcjI5NWZfMjAyMzA4MjggcWlhbi53aWxsLnlhbkBt",
+        "created": "2021-10-29T03:43:21.000Z",
+        "updated": "2021-10-29T03:43:21.273Z",
+        "summary": "宜宝生日",
+        "creator": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
+        },
+        "organizer": {
+            "email": "qian.will.yan@gmail.com",
+            "self": True
+        },
+        "start": {
+            "date": "2023-08-28"
+        },
+        "end": {
+            "date": "2023-08-29"
+        },
+        "recurringEventId": "2oios4v8fp173kcfdttbor295f",
+        "originalStartTime": {
+            "date": "2023-08-28"
+        },
+        "transparency": "transparent",
+        "iCalUID": "2oios4v8fp173kcfdttbor295f@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": 18750
+                }
+            ]
+        },
+        "eventType": "default"
+    }
+]
