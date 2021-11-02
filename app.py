@@ -2,6 +2,7 @@ from __future__ import print_function
 from datetime import datetime, timedelta
 import logging
 import os.path
+from time import sleep
 from typing import Any, Optional
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -22,6 +23,9 @@ NOTION_INTEGRATION_CREDENTIAL_PATH = "secret/notion-secret.txt"
 
 # notion
 NOTION_CALENDAR_DB_ID = "56de8fb5-bae9-47b2-80bc-7c79db8b5cba"
+
+# pool interval in secs
+POOL_INTERVAL = 300
 
 
 def __get_google_credential() -> Credentials:
@@ -143,34 +147,42 @@ def __notion_create_page(event: Event) -> bool:
 
 
 def main() -> None:
-    now = datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
-    two_yr_later = (
-        datetime.utcnow() + timedelta(days=90)
-    ).isoformat() + "Z"  # 'Z' indicates UTC time
+    while True:
+        now = datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+        end_time = (
+            datetime.utcnow() + timedelta(days=90)
+        ).isoformat() + "Z"  # 'Z' indicates UTC time
+        print("Start syncing @ ", now)
 
-    print("Getting Google Calendar Events...")
-    google_cal_events = __read_calendar(now, two_yr_later)
-    print("Got " + str(len(google_cal_events)))
+        print("Getting Google Calendar Events...")
+        google_cal_events = __read_calendar(now, end_time)
+        print("Got " + str(len(google_cal_events)))
 
-    print("Getting Notion Pages...")
-    notion_pages = __read_notion(now, two_yr_later)
-    print("Got " + str(len(notion_pages)))
+        print("Getting Notion Pages...")
+        notion_pages = __read_notion(now, end_time)
+        print("Got " + str(len(notion_pages)))
 
-    # Find google cal events need to by synced
-    synced_google_cal_ids = [
-        page.google_cal_id for page in notion_pages if page.google_cal_id
-    ]
-    unsynced_google_cal_events = [
-        event
-        for event in google_cal_events
-        if event.google_cal_id not in synced_google_cal_ids
-    ]
-    print("Will sync " + str(len(unsynced_google_cal_events)) + " google cal events...")
-    created = 0
-    for event in unsynced_google_cal_events:
-        if __notion_create_page(event):
-            created += 1
-    print("Successfully created " + str(created) + " pages!")
+        # Find google cal events need to by synced
+        synced_google_cal_ids = [
+            page.google_cal_id for page in notion_pages if page.google_cal_id
+        ]
+        unsynced_google_cal_events = [
+            event
+            for event in google_cal_events
+            if event.google_cal_id not in synced_google_cal_ids
+        ]
+        print(
+            "Will sync "
+            + str(len(unsynced_google_cal_events))
+            + " google cal events..."
+        )
+        created = 0
+        for event in unsynced_google_cal_events:
+            if __notion_create_page(event):
+                created += 1
+        print("Successfully created " + str(created) + " pages!")
+
+        sleep(POOL_INTERVAL)
 
 
 if __name__ == "__main__":
