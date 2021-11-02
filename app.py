@@ -7,6 +7,8 @@ from typing import Any, Optional
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from sys import argv, exit
+from getopt import GetoptError, getopt
 from google.oauth2.credentials import Credentials
 from notion_client import Client
 
@@ -22,7 +24,7 @@ USER_TOKEN_PAHT = "secret/token.json"
 NOTION_INTEGRATION_CREDENTIAL_PATH = "secret/notion-secret.txt"
 
 # notion
-NOTION_CALENDAR_DB_ID = "56de8fb5-bae9-47b2-80bc-7c79db8b5cba"
+NOTION_CALENDAR_DB_ID = None
 
 # pool interval in secs
 POOL_INTERVAL = 300
@@ -146,20 +148,34 @@ def __notion_create_page(event: Event) -> bool:
     return True
 
 
-def main() -> None:
+def main(argv: list[str]) -> None:
+    global NOTION_CALENDAR_DB_ID
+    try:
+        opts, args = getopt(argv, "d:", ["data_base_id="])
+    except GetoptError:
+        print("app.py -d <notion_data_base_id>")
+        exit(2)
+    for opt, arg in opts:
+        if opt in ("-d", "--data_base_id"):
+            NOTION_CALENDAR_DB_ID = arg
+        else:
+            print("app.py -d <notion_data_base_id>")
+            exit(2)
+
     while True:
-        now = datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+        now = datetime.utcnow()
+        start_time = now.isoformat() + "Z"  # 'Z' indicates UTC time
         end_time = (
-            datetime.utcnow() + timedelta(days=90)
+            now + timedelta(days=90)
         ).isoformat() + "Z"  # 'Z' indicates UTC time
-        print("Start syncing @ ", now)
+        print("Start syncing @ ", start_time)
 
         print("Getting Google Calendar Events...")
-        google_cal_events = __read_calendar(now, end_time)
+        google_cal_events = __read_calendar(start_time, end_time)
         print("Got " + str(len(google_cal_events)))
 
         print("Getting Notion Pages...")
-        notion_pages = __read_notion(now, end_time)
+        notion_pages = __read_notion(start_time, end_time)
         print("Got " + str(len(notion_pages)))
 
         # Find google cal events need to by synced
@@ -181,9 +197,10 @@ def main() -> None:
             if __notion_create_page(event):
                 created += 1
         print("Successfully created " + str(created) + " pages!")
+        print("\n")
 
         sleep(POOL_INTERVAL)
 
 
 if __name__ == "__main__":
-    main()
+    main(argv[1:])
