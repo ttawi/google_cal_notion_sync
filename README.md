@@ -16,7 +16,7 @@ pip3 install -r requirements.txt
 
 4. Run the app simply w/
 ```
-python3 app.py
+python3 app.py -d <your_notion_db_id>
 ```
 
 # Docker deployment
