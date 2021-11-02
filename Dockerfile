@@ -7,5 +7,6 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
+ENV NOTION_DB_ID="your notion db id"
 COPY . .
-CMD [ "python3", "app.py"]
+ENTRYPOINT exec python3 -u app.py -d ${NOTION_DB_ID}
