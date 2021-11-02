@@ -29,5 +29,5 @@ docker build -t google_cal_notion_sync .
 
 2. Run the image w/
 ```
-docker run -d google_cal_notion_sync
+docker run -e NOTION_DB_ID=<your_notion_db_id> -d google_cal_notion_sync
 ```
