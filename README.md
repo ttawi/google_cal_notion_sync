@@ -1,5 +1,8 @@
-# google Calendar Notion Sync
+# Google Calendar Notion Sync
 A tool to sync google calendar events to notion that can be deployed through Docker.
+
+# The latest built docker image
+[Docker Hub](https://hub.docker.com/repository/docker/qiany7/google_cal_notion_sync/general)
 
 # Local development
 
@@ -19,7 +22,7 @@ pip3 install -r requirements.txt
 python3 app.py -d <your_notion_db_id>
 ```
 
-# Docker deployment
+# Build docker image for yourself
 Recommend to run locally first to obtain Google access token.
 
 1. Build the image w/
