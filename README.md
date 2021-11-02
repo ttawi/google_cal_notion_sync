@@ -4,6 +4,10 @@ A tool to sync google calendar events to notion that can be deployed through Doc
 # The latest built docker image
 [Docker Hub](https://hub.docker.com/repository/docker/qiany7/google_cal_notion_sync/general)
 
+One will need to:
+1. Assign the Notion DB ID env var
+2. Map the `secret` folder
+
 # Local development
 
 1. Install dependencies with
