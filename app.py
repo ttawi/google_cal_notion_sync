@@ -27,7 +27,7 @@ NOTION_INTEGRATION_CREDENTIAL_PATH = "secret/notion-secret.txt"
 NOTION_CALENDAR_DB_ID = None
 
 # pool interval in secs
-POOL_INTERVAL = 300
+POOL_INTERVAL = 10
 
 
 def __get_google_credential() -> Credentials:
@@ -176,7 +176,13 @@ def main(argv: list[str]) -> None:
             print("Got " + str(len(google_cal_events)))
 
             print("Getting Notion Pages...")
-            notion_pages = __read_notion(start_time, end_time)
+            # Because notion filters on time differently than google:
+            #   Currently ongoing event will not be returned by notion, but by google
+            # We will be looking at a larger time window for notion
+            notion_start_time = (
+                now - timedelta(days=365)
+            ).isoformat() + "Z"  # 'Z' indicates UTC time
+            notion_pages = __read_notion(notion_start_time, end_time)
             print("Got " + str(len(notion_pages)))
 
             # Find google cal events need to by synced
