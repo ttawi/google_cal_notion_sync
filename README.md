@@ -16,7 +16,7 @@ pip3 install -r requirements.txt
 ```
 
 2. Register a Google Cloud Platform (GCP) project to get the client credentials
-    1. You can follow [my note](https://cord-sodalite-2c6.notion.site/Google-Workspace-API-33864394338e4b3b90d63a1cbe754a2c) here is you are new to using Google Workplace API like me.
+    1. You can follow [my note](https://cord-sodalite-2c6.notion.site/Google-Workspace-API-33864394338e4b3b90d63a1cbe754a2c) here if you are new to using Google Workplace API like me.
     2. Download the client credential json and put it in `secret/` folder
 
 3. Create an integration w/ Notion and share the Notion DB you want to use w/ the tool w/ this integration.
