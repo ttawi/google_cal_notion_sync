@@ -46,7 +46,7 @@ def __get_google_credential() -> Credentials:
                 APP_CLIENT_CREDENTIAL_PATH, SCOPES
             )
             # OAuth through an offline way to work w/ faceless docker env.
-            creds = flow.run_console(port=8090)
+            creds = flow.run_console(port=8090, accesstype="offline")
         # Save the credentials for the next run
         with open(USER_TOKEN_PAHT, "w") as token:
             token.write(creds.to_json())
