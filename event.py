@@ -155,7 +155,8 @@ class Event:
                             {
                                 "type": "text",
                                 "text": {
-                                    "content": self.desc,
+                                    # Limit the desc length to 2000
+                                    "content": self.desc[:2000],
                                 },
                             }
                         ]
