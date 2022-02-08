@@ -27,7 +27,7 @@ NOTION_INTEGRATION_CREDENTIAL_PATH = "secret/notion-secret.txt"
 NOTION_CALENDAR_DB_ID = None
 
 # pool interval in secs
-POOL_INTERVAL = 10
+POOL_INTERVAL = 300
 
 
 def __get_google_credential() -> Credentials:
