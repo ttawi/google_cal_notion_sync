@@ -91,9 +91,18 @@ def __read_notion(start_time: str, end_time: str) -> list[Event]:
         ]
     }
     date_sort = [{"property": "Date", "direction": "ascending"}]
-    notion_events = notion.databases.query(
+    query_result = notion.databases.query(
         NOTION_CALENDAR_DB_ID, filter=date_filter, sorts=date_sort
-    )["results"]
+    )
+    notion_events = query_result["results"]
+    while query_result["has_more"]:
+        query_result = notion.databases.query(
+            NOTION_CALENDAR_DB_ID,
+            start_cursor=query_result["next_cursor"],
+            filter=date_filter,
+            sorts=date_sort,
+        )
+        notion_events.extend(query_result["results"])
 
     # print properties
     # print(notion_events)
