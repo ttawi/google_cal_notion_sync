@@ -27,7 +27,17 @@ NOTION_INTEGRATION_CREDENTIAL_PATH = "secret/notion-secret.txt"
 NOTION_CALENDAR_DB_ID = None
 
 # pool interval in secs
-POOL_INTERVAL = 300
+POOL_INTERVAL = 10
+
+# Because notion filters on time differently than google:
+#   Currently ongoing event will not be returned by notion, but by google
+# We will be looking at a larger time window for notion
+# Google window:
+#   now : now + NOTION_LOOKUP_WINDOW
+# Notion window:
+#   now - NOTION_LOOKUP_EXTRA_WINDOW : now + NOTION_LOOKUP_WINDOW + NOTION_LOOKUP_EXTRA_WINDOW
+NOTION_LOOKUP_WINDOW = 90
+NOTION_LOOKUP_EXTRA_WINDOW = 90
 
 
 def __get_google_credential() -> Credentials:
@@ -46,7 +56,13 @@ def __get_google_credential() -> Credentials:
                 APP_CLIENT_CREDENTIAL_PATH, SCOPES
             )
             # OAuth through an offline way to work w/ faceless docker env.
-            creds = flow.run_console(port=8090, accesstype="offline")
+            creds = flow.run_console(
+                port=8090,
+                # Enable offline access so that you can refresh an access token without
+                access_type="offline",
+                # Enable incremental authorization. Recommended as a best practice.
+                include_granted_scopes="true",
+            )
         # Save the credentials for the next run
         with open(USER_TOKEN_PAHT, "w") as token:
             token.write(creds.to_json())
@@ -157,6 +173,23 @@ def __notion_create_page(event: Event) -> bool:
     return True
 
 
+def __notion_update_page(notion_event: Event, google_event: Event) -> bool:
+    credential = open(NOTION_INTEGRATION_CREDENTIAL_PATH, "r").readline()
+    notion = Client(
+        auth=credential,
+    )
+
+    try:
+        notion.pages.update(
+            page_id=notion_event.notion_page_id,
+            properties=google_event.to_property(),
+        )
+    except:
+        logging.exception("Failed to update page")
+        return False
+    return True
+
+
 def main(argv: list[str]) -> None:
     global NOTION_CALENDAR_DB_ID
     try:
@@ -176,7 +209,7 @@ def main(argv: list[str]) -> None:
             now = datetime.utcnow()
             start_time = now.isoformat() + "Z"  # 'Z' indicates UTC time
             end_time = (
-                now + timedelta(days=90)
+                now + timedelta(days=NOTION_LOOKUP_WINDOW)
             ).isoformat() + "Z"  # 'Z' indicates UTC time
             print("Start syncing @ ", start_time)
 
@@ -189,10 +222,46 @@ def main(argv: list[str]) -> None:
             #   Currently ongoing event will not be returned by notion, but by google
             # We will be looking at a larger time window for notion
             notion_start_time = (
-                now - timedelta(days=365)
+                now - timedelta(days=NOTION_LOOKUP_EXTRA_WINDOW)
             ).isoformat() + "Z"  # 'Z' indicates UTC time
-            notion_pages = __read_notion(notion_start_time, end_time)
+            notion_end_time = (
+                now + timedelta(days=NOTION_LOOKUP_WINDOW + NOTION_LOOKUP_EXTRA_WINDOW)
+            ).isoformat() + "Z"  # 'Z' indicates UTC time
+            notion_pages = __read_notion(notion_start_time, notion_end_time)
             print("Got " + str(len(notion_pages)))
+
+            # Try update existing notion events
+            google_cal_id_to_event = {
+                google_cal_event.google_cal_id: google_cal_event
+                for google_cal_event in google_cal_events
+                if google_cal_event.google_cal_id
+            }
+            updated_notion_events = [
+                notion_event
+                for notion_event in notion_pages
+                if notion_event.google_cal_id in google_cal_id_to_event
+                and (
+                    datetime.fromisoformat(notion_event.start_time)
+                    != datetime.fromisoformat(
+                        google_cal_id_to_event[notion_event.google_cal_id].start_time
+                    )
+                    or datetime.fromisoformat(notion_event.end_time)
+                    != datetime.fromisoformat(
+                        google_cal_id_to_event[notion_event.google_cal_id].end_time
+                    )
+                )
+            ]
+            print(
+                "Need to update " + str(len(updated_notion_events)) + " notion events."
+            )
+            updated = 0
+            for notion_event in updated_notion_events:
+                if __notion_update_page(
+                    notion_event, google_cal_id_to_event[notion_event.google_cal_id]
+                ):
+                    updated += 1
+            if updated > 0:
+                print("Updated " + str(updated) + " pages!")
 
             # Find google cal events need to by synced
             synced_google_cal_ids = [
@@ -212,7 +281,9 @@ def main(argv: list[str]) -> None:
             for event in unsynced_google_cal_events:
                 if __notion_create_page(event):
                     created += 1
-            print("Successfully created " + str(created) + " pages!")
+            if created > 0:
+                print("Successfully created " + str(created) + " pages!")
+
             print("\n")
         except:
             logging.exception("Failed to create page")
