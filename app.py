@@ -26,8 +26,8 @@ NOTION_INTEGRATION_CREDENTIAL_PATH = "secret/notion-secret.txt"
 # notion
 NOTION_CALENDAR_DB_ID = None
 
-# pool interval in secs
-POOL_INTERVAL = 10
+# pull interval in secs
+PULL_INTERVAL = 60
 
 # Because notion filters on time differently than google:
 #   Currently ongoing event will not be returned by notion, but by google
@@ -200,6 +200,8 @@ def main(argv: list[str]) -> None:
     for opt, arg in opts:
         if opt in ("-d", "--data_base_id"):
             NOTION_CALENDAR_DB_ID = arg
+        if opt in ("--pull_interval"):
+            PULL_INTERVAL = arg
         else:
             print("app.py -d <notion_data_base_id>")
             exit(2)
@@ -288,7 +290,7 @@ def main(argv: list[str]) -> None:
         except:
             logging.exception("Failed to create page")
 
-        sleep(POOL_INTERVAL)
+        sleep(PULL_INTERVAL)
 
 
 if __name__ == "__main__":
