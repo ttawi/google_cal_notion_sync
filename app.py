@@ -191,19 +191,22 @@ def __notion_update_page(notion_event: Event, google_event: Event) -> bool:
 
 
 def main(argv: list[str]) -> None:
-    global NOTION_CALENDAR_DB_ID
+    global NOTION_CALENDAR_DB_ID, PULL_INTERVAL
+
     try:
-        opts, args = getopt(argv, "d:", ["data_base_id="])
+        opts, args = getopt(argv, "d:", ["data_base_id=", "pull_interval="])
     except GetoptError:
         print("app.py -d <notion_data_base_id>")
         exit(2)
     for opt, arg in opts:
         if opt in ("-d", "--data_base_id"):
             NOTION_CALENDAR_DB_ID = arg
-        if opt in ("--pull_interval"):
-            PULL_INTERVAL = arg
+        elif opt in ("--pull_interval"):
+            PULL_INTERVAL = int(arg)
         else:
-            print("app.py -d <notion_data_base_id>")
+            print(
+                "app.py -d <notion_data_base_id> --pull_interval <interval_between_pulls>"
+            )
             exit(2)
 
     while True:
@@ -282,6 +285,7 @@ def main(argv: list[str]) -> None:
             created = 0
             for event in unsynced_google_cal_events:
                 if __notion_create_page(event):
+                    print("Created: " + event.summary)
                     created += 1
             if created > 0:
                 print("Successfully created " + str(created) + " pages!")

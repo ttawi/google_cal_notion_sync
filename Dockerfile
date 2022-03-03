@@ -8,5 +8,6 @@ COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
 ENV NOTION_DB_ID="your notion db id"
+ENV PULL_INTERVAL="interval to pull google cal"
 COPY . .
-ENTRYPOINT exec python3 -u app.py -d ${NOTION_DB_ID}
+ENTRYPOINT exec python3 -u app.py -d ${NOTION_DB_ID} --pull_interval ${PULL_INTERVAL}
